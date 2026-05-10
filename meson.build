@@ -14,7 +14,6 @@ i18n = import('i18n')
 pkg = import('pkgconfig')
 
 cpp = meson.get_compiler('cpp')
-crypto_dep = cpp.find_library('crypto', required: true)
 zlib_dep = dependency('zlib', required: true)
 libintl_dep = cpp.find_library('intl', required: false)
 have_gettext_header = cpp.has_header('libintl.h')
@@ -49,20 +48,21 @@ library_sources = files(
   'src/ota/otacodec.cpp',
   'src/resources/resourcecodec.cpp',
   'src/io/filesystemsupport.cpp',
+  'src/support/sha256.cpp',
 )
 
 libpowpack = library(
   'powpack',
   library_sources,
   include_directories: [public_inc, private_inc],
-  dependencies: [crypto_dep, zlib_dep],
+  dependencies: [zlib_dep],
   install: true,
 )
 
 powpack_dep = declare_dependency(
   link_with: libpowpack,
   include_directories: public_inc,
-  dependencies: (libintl_dep.found() ? [libintl_dep] : []) + [crypto_dep, zlib_dep],
+  dependencies: (libintl_dep.found() ? [libintl_dep] : []) + [zlib_dep],
 )
 
 cli_dependencies = [powpack_dep]

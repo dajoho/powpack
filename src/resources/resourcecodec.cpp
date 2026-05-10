@@ -17,10 +17,10 @@
 #include <string_view>
 #include <vector>
 
-#include <openssl/sha.h>
 #include <zlib.h>
 
 #include "io/filesystemsupport.hpp"
+#include "support/sha256.hpp"
 #include "support/exceptionsupport.hpp"
 
 namespace fs = std::filesystem;
@@ -108,19 +108,6 @@ struct Metadata {
     ResourceFileHeader header;
     std::vector<MetadataEntry> entries;
 };
-
-std::string sha256Hex(const std::vector<std::uint8_t> &data) {
-    std::array<unsigned char, SHA256_DIGEST_LENGTH> digest {};
-    SHA256(data.data(), data.size(), digest.data());
-    static constexpr char hex[] = "0123456789abcdef";
-    std::string result;
-    result.reserve(SHA256_DIGEST_LENGTH * 2);
-    for (unsigned char byte : digest) {
-        result.push_back(hex[(byte >> 4) & 0x0f]);
-        result.push_back(hex[byte & 0x0f]);
-    }
-    return result;
-}
 
 std::vector<std::uint8_t> zlibInflate(const std::vector<std::uint8_t> &compressed, std::size_t expectedSize) {
     std::vector<std::uint8_t> output(expectedSize);
