@@ -4,6 +4,8 @@
 Actions `.fw`, PowKiddy OTA `update.zip`, and Actions resource `.res` / `.str`
 containers.
 
+Powpack is heavily based on https://github.com/FoxExe/PowKiddy_fw (also GPL2) but in C++, without the python requirement. It is structured as a library so it can be used by other applications. powpack is just a thin cli around libpowpack.
+
 Project structure:
 
 - central reusable library
