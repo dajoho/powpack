@@ -1,0 +1,14 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: powpack 0.1.0\n"
+"Language: en\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "Usage:"
+msgstr "Usage:"
+
+msgid "Extracted to"
+msgstr "Extracted to"
+
+msgid "Packed to"
+msgstr "Packed to"
